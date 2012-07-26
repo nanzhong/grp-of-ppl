@@ -1,5 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+  <div>
+    <div>
+      <h1 style="display:inline; margin-right:20px;"><%= @user.email %></h1><%= link_to "Edit profile", edit_user_path(@user) %>
+    </div>
+    <h3>Display name</h3>
+    <%= @user.name %>
+    
+  </div>
 
+  <% unless @user.group_invites.empty? %>
+    <div>
+      <h2>Pending Invites</h2>
+      <% i = 0 %>
+      <% @user.group_invites.each do |invite| %>
+        <% if i % 3 == 0 %>
+        <div class="row-fluid">
+        <% end %>
+        <div class="span4" id="invite-<%= invite.group.id %>">
+          <div class="group-container">
+            <h3><%= invite.group.name %></h3>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+            <h4>Members</h4>
+            <ul>
+              <% invite.group.users.each do |user| %>
+                <li><%= user.email %></li>
+              <% end %>
+            </ul>
+
+            <%= link_to "Accept", { :controller => 'users', :action => 'accept_invite', :id => @user.id, :token => invite.token }, :remote => true, :class => "btn btn-primary" %>
+            <%= link_to "Ignore", { :controller => 'users', :action => 'ignore_invite', :id => @user.id, :token => invite.token }, :remote => true, :class => "btn", :style => "margin-left:5px;" %>
+          </div>
+        </div>
+        <% if i % 3 == 0 %>
+        </div>
+        <% end %>
+      <% end %>
+      <% if i % 3 != 0 %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

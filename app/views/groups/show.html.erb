@@ -13,7 +13,7 @@
 
 <div class="row-fluid">
   <div class="span9">
-    <h1 style="display:inline;"><%= @group.name %></h1><div style="float:right;"><%= link_to "Manage this group", edit_group_path(@group) %></div>
+    <div><h1 style="display:inline; margin-right:20px"><%= @group.name %></h1><%= link_to "Manage this group", edit_group_path(@group) %></div>
 
     <div id="share-form-location" style="padding-top:10px;">
     </div>

@@ -58,7 +58,7 @@ GrpOfPpl::Application.routes.draw do
 
   root :to => "home#index", :as => :root
 
-  resources :users , :except => [:index, :new, :show] do
+  resources :users , :except => [:index, :new] do
     get 'sign_in(/:token)' => 'users#sign_in', :as => :sign_in
     delete 'sign_out' => 'users#sign_out', :as => :sign_out
   end

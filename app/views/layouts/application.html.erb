@@ -35,7 +35,7 @@
 
         <ul class="nav pull-right">
           <li>
-          <a href="<%= edit_user_path(@current_user) %>"><%= @current_user.email %><span id="notification-badge"><% if @current_user.group_invites.count > 0 %><span style="margin-left:10px;" class="badge badge-info"><%= @current_user.group_invites.count %></span></span><% end %></a>
+          <a href="<%= user_path(@current_user) %>"><%= @current_user.email %><span id="notification-badge"><% if @current_user.group_invites.count > 0 %><span style="margin-left:10px;" class="badge badge-info"><%= @current_user.group_invites.count %></span></span><% end %></a>
           </li>
           <li class="divider-vertical"></li>
           <li><%= link_to "Sign Out", user_sign_out_path(@current_user), :method => :delete %></li>
