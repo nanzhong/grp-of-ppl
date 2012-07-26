@@ -3,6 +3,6 @@
     <%= p.text_area :data, :class => "span12", :style => "height:100px;", :id => "reply-form-#{parent_post.id}-input" %>
     <%= hidden_field_tag :parent_id, parent_post.id %>
     <%= p.submit "Post it!", :class => "btn" %>
-    <%= link_to 'Cancel', { :controller => 'groups', :action => 'hide_reply', :id => @group.id, :post_id => parent_post.id }, :remote => true, :method => :get, :class => "btn" %>
+    <%= link_to 'Cancel', "#", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}').remove();" %>
   <% end %>
 </div>
