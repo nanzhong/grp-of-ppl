@@ -6,8 +6,12 @@
   });
 
   group_channel.bind('new-reply', function(data) {
-    $('#post-' + data.parent_id + ' > .post-level > .post-container').after(data.html);
-    $('#reply-form-' + data.parent_id).remove();
+    if ($('#reply-form-' + data.parent_id + '-safe').length == 0) {
+      $('#reply-form-' + data.parent_id).remove();
+      $('#post-' + data.parent_id + ' > .post-level > .post-container').after(data.html);
+    } else {
+      $('#post-' + data.parent_id + ' > .post-level > #reply-form-' + data.parent_id).after(data.html);
+    }
   });
 </script>
 

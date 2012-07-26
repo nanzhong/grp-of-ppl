@@ -2,7 +2,8 @@
   <%= form_for [@group, post], :remote => true do |p| %>
     <%= p.text_area :data, :class => "span12", :style => "height:100px;", :id => "reply-form-#{parent_post.id}-input" %>
     <%= hidden_field_tag :parent_id, parent_post.id %>
-    <%= p.submit "Post it!", :class => "btn" %>
+    <%= p.submit "Post it!", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}-safe').remove();" %>
     <%= link_to 'Cancel', "#", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}').remove();" %>
   <% end %>
+  <div id ="reply-form-<%= parent_post.id %>-safe"></div>
 </div>
