@@ -1,4 +1,3 @@
 <% publish "groups-#{@group.id}", 'new-post' do %>
-  $('#posts').prepend("<%= escape_javascript render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>");
-  $('#share-form').remove();
+  <%= render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>
 <% end %>

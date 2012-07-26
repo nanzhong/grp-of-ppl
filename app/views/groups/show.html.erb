@@ -1,8 +1,13 @@
 <script type="text/javascript">
-  var pusher = new Pusher('<%= Pusher.key %>');
-  var channel = pusher.subscribe('groups-<%= @group.id %>');
-  channel.bind('new-post', function(data) {
-    eval(data);
+  var group_channel = pusher.subscribe('groups-<%= @group.id %>');
+  group_channel.bind('new-post', function(data) {
+    $('#posts').prepend(data.html);
+    $('#share-form').remove();
+  });
+
+  group_channel.bind('new-reply', function(data) {
+    $('#post-' + data.parent_id + ' > .post-level > .post-container').after(data.html);
+    $('#reply-form-' + data.parent_id).remove();
   });
 </script>
 

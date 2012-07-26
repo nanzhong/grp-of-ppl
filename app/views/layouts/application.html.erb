@@ -11,6 +11,14 @@
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+
+  <script type="text/javascript">
+    var pusher = new Pusher('<%= Pusher.key %>');
+    var user_channel = pusher.subscribe('users-<%= @current_user.id %>');
+    user_channel.bind('invite-change', function(data) {
+      eval(data);
+    });
+  </script>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">

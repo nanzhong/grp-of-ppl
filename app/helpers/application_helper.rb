@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def publish(channel, event, &block)
-    Push.publish(channel, event, capture(&block))
+  def publish(channel, event, data = {}, &block)
+    Push.publish(channel, event, data.merge(:html => capture(&block)))
   end
 
 end

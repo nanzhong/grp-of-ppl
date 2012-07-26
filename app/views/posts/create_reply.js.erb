@@ -1,4 +1,3 @@
-<% publish "groups-#{@group.id}", 'new-post' do %>
-  $('#post-<%= @parent.id %> > .post-level > .post-container').after("<%= escape_javascript render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>");
-  $('#reply-form-<%= @parent.id %>').remove();
+<% publish "groups-#{@group.id}", 'new-reply', :parent_id => @parent.id do %>
+  <%= render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>
 <% end %>
