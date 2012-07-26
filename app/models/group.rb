@@ -45,9 +45,10 @@ class Group
         invite = user.group_invites.build(:token => token)
         invite.group = self
         invite.save
-      end
 
-      InviteMailer.group_invite_email(email, self, token).deliver
+        # XXX see GroupInvite model
+        PubSub.publish "users-#{invite.user.id}", 'invite-add', { :badge => invite.user.group_invites.count, :id => invite.id }
+      end
     end
   end
 

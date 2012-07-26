@@ -61,14 +61,14 @@ GrpOfPpl::Application.routes.draw do
   resources :users , :except => [:index, :new] do
     get 'sign_in(/:token)' => 'users#sign_in', :as => :sign_in
     delete 'sign_out' => 'users#sign_out', :as => :sign_out
+    match 'accept_invite/:token' => 'users#accept_invite'
+    match 'ignore_invite/:token' => 'users#ignore_invite'
+    get 'show_invite/:invite_id' => 'users#show_invite'
   end
 
   resources :groups do
     resources :posts, :only => [ :create ]
   end
-
-  match '/users/:id/accept_invite/:token' => 'users#accept_invite'
-  match '/users/:id/ignore_invite/:token' => 'users#ignore_invite'
 
   match '/groups/:id/join/:token' => 'groups#join', :as => :join
   match '/groups/:id/show_reply/:post_id' => 'groups#show_reply'

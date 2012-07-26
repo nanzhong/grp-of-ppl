@@ -1,0 +1,15 @@
+<div id="invite-<%= invite.group.id %>">
+  <div class="group-container">
+    <h3><%= invite.group.name %></h3>
+
+    <h4>Members</h4>
+    <ul>
+      <% invite.group.users.each do |user| %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
+
+    <%= link_to "Accept", { :controller => 'users', :action => 'accept_invite', :user_id => @user.id, :token => invite.token }, :remote => true, :class => "btn btn-primary" %>
+    <%= link_to "Ignore", { :controller => 'users', :action => 'ignore_invite', :user_id => @user.id, :token => invite.token }, :remote => true, :class => "btn", :style => "margin-left:5px;" %>
+  </div>
+</div>

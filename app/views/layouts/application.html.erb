@@ -15,8 +15,28 @@
   <script type="text/javascript">
     var pusher = new Pusher('<%= Pusher.key %>');
     var user_channel = pusher.subscribe('users-<%= @current_user.id %>');
-    user_channel.bind('invite-change', function(data) {
-      eval(data);
+    user_channel.bind('invite-add', function(data) {
+        if ($('#badge-count').length > 0) {
+          $('#badge-count').html(data.badge);
+        } else {
+          $('#notification-badge').append('<span class="badge badge-info" id="badge-count">' + data.badge + '</span>');
+        }
+
+        $.get('/users/<%= @current_user.id %>/show_invite/' + data.id); 
+    });
+
+    user_channel.bind('invite-del', function(data) {
+        if (data.badge == 0) {
+          $('#badge-count').remove();
+        } else {
+          if ($('#badge-count').length > 0) {
+            $('#badge-count').html(data.badge);
+          } else {
+            $('#notification-badge').append('<span class="badge badge-info" id="badge-count">' + data.badge + '</span>');
+          }
+        }
+
+        $('#invite-' + data.id).remove();
     });
   </script>
 </head>
@@ -35,7 +55,7 @@
 
         <ul class="nav pull-right">
           <li>
-          <a href="<%= user_path(@current_user) %>"><%= @current_user.email %><span id="notification-badge"><% if @current_user.group_invites.count > 0 %><span style="margin-left:10px;" class="badge badge-info"><%= @current_user.group_invites.count %></span></span><% end %></a>
+          <a href="<%= user_path(@current_user) %>"><%= @current_user.email %><span style="margin-left:10px;" id="notification-badge"><% if @current_user.group_invites.count > 0 %><span class="badge badge-info" id="badge-count"><%= @current_user.group_invites.count %></span></span><% end %></a>
           </li>
           <li class="divider-vertical"></li>
           <li><%= link_to "Sign Out", user_sign_out_path(@current_user), :method => :delete %></li>

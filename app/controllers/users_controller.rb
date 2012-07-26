@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   def accept_invite
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @invite = @user.group_invites.find_by(:token => params[:token])
     @invite.group.invitees.where(:token => params[:token]).each do |invitee|
       @invite.group.invitees.delete(invitee)
@@ -93,19 +93,37 @@ class UsersController < ApplicationController
     @invite.group.users.push @user
 
     @invite.delete
+
+    # XXX see GroupInvite model
+    PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }
   end
 
    def ignore_invite
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @invite = @user.group_invites.find_by(:token => params[:token])
     @invite.group.invitees.where(:token => params[:token]).each do |invitee|
       @invite.group.invitees.delete(invitee)
     end
     @invite.delete
+
+    # XXX see GroupInvite model
+    PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }
+  end
+
+  def show_invite
+    @user = User.find(params[:user_id])
+    @invite = @user.group_invites.where(:id => params[:invite_id])
+
+    if @invite.empty?
+      render :nothing
+      return
+    end
+
+    @invite = @invite.first
   end
 
   private
   def owner_of_user
-    redirect_to root_path unless @current_user.id.to_s == params[:id]
+    redirect_to root_path unless @current_user.id.to_s == params[:id] or @current_user.id.to_s == params[:user_id] 
   end
 end
