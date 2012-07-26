@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :require_sign_in
-  before_filter :owner_of_user
+  before_filter :require_sign_in, :except => [:sign_in]
+  before_filter :owner_of_user, :except => [:sign_in]
 
   # GET /users/1
   # GET /users/1.json
@@ -124,6 +124,6 @@ class UsersController < ApplicationController
 
   private
   def owner_of_user
-    redirect_to root_path unless @current_user.id.to_s == params[:id] or @current_user.id.to_s == params[:user_id] 
+    redirect_to root_path unless (@current_user.id.to_s == params[:id] or @current_user.id.to_s == params[:user_id] )
   end
 end

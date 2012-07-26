@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  before_filter :require_sign_in 
+  before_filter :require_sign_in , :except => [:join]
   before_filter :group_from_id, :except => [:index, :new, :create]
   before_filter :member_of_group, :only => [:show, :edit, :update, :destroy, :show_reply, :hide_reply]
   before_filter :no_cache
