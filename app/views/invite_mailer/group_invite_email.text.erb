@@ -1,3 +1,5 @@
-You have been invited to join <% @group.name %>!
-======================================
-<%= join_url(:id => @group.id, :token => @token) %>
+You have been invited to join a group!!
+<%= "="*100 %>
+<%= @group.name %>
+<%= @group.description unless @group.description.blank? %>
+To join go to this link in your browser: <%= join_url(:id => @group.id, :token => @token) %>

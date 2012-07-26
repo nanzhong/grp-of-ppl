@@ -1,5 +1,6 @@
 class InviteMailer < ActionMailer::Base
-  default from: "no-reply@grpofppl.com"
+  default :from => "no-reply@grpofppl.com", 
+          :reply_to => "no-reply@grpofppl.com"
 
   def group_invite_email(email, group, token)
     @group = group

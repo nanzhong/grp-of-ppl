@@ -2,10 +2,17 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Welcome to grp of ppl!</h1>
-    <p>If you ever get logged out of our site <%= link_to "click here to sign back in!", user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></p>
-    <p>If the above link does not work, please copy and past this link into your browser: <%= link_to user_sign_in_url(:user_id => @user.id, :token => @user.auth_token), user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></p>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>Welcome to grp of ppl!</h1>
+          <p>If you ever get logged out of our site <%= link_to "click here to sign back in!", user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></p>
+          <p><em>If the above link does not work, please copy and past this link into your browser: <%= link_to user_sign_in_url(:user_id => @user.id, :token => @user.auth_token), user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></em></p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

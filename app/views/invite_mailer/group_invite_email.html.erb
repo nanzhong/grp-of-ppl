@@ -2,10 +2,21 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>You have been invited to join <%= @group.name %>!</h1>
-    <p><%= link_to "Click here to join!", join_url(:id => @group.id, :token => @token) %></p>
-    <p>If the above link does not work, please copy and past this link into your browser <%= link_to join_url(:id => @group.id, :token => @token), join_url(:id => @group.id, :token => @token) %></p>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>You have been invited to join a group!</h1>
+          <div>
+            <h2><%= @group.name %></h2>
+            <%= @group.description unless @group.description.blank? %>
+          </div>
+          <p><%= link_to "Click here to join!", join_url(:id => @group.id, :token => @token), :class => "btn btn-primary btn-large" %></p>
+          <p><em>If the above link does not work, please copy and past this link into your browser <%= link_to join_url(:id => @group.id, :token => @token), join_url(:id => @group.id, :token => @token) %></em></p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

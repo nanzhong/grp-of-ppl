@@ -68,9 +68,8 @@ GrpOfPpl::Application.configure do
   :address              => "smtp.gmail.com",
   :port                 => 587,
   :domain               => 'grpofppl.com',
-  :user_name            => 'nan@grpofppl.com',
-  :password             => 'nanailing4ever',
+  :user_name            => 'no-reply@grpofppl.com',
+  :password             => 'no-reply',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
-
 end
