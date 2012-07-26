@@ -8,7 +8,18 @@
 </div>
 
 <script type="text/javascript">
+  var clicked = false;
   $('#share-form-input').bind('keyup', 'ctrl+return', function(){
-    $('#share-form-submit').click();
+      if (!clicked) {
+        $('#share-form-submit').click();
+        clicked = true;
+      }
+  });
+
+  $('#share-form-input').bind('keyup', 'ctrl+enter', function(){
+      if (!clicked) {
+        $('#share-form-submit').click();
+        clicked = true;
+      }
   });
 </script>
