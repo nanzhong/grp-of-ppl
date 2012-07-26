@@ -6,6 +6,7 @@ gem 'mongoid', '~> 3.0.0'
 gem 'devise'
 gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
+gem 'jquery-hotkeys-rails'
 gem 'httparty'
 gem 'pusher'
 gem 'thin'

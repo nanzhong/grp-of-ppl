@@ -1,9 +1,15 @@
 <div id="reply-form-<%= parent_post.id %>" style="margin-left:<%= (parent_post.nest_level + 1) * 20 %>px;">
-  <%= form_for [@group, post], :remote => true do |p| %>
+  <%= form_for [@group, post], :remote => true, :id => "reply-form-#{parent_post.id}-form" do |p| %>
     <%= p.text_area :data, :class => "span12", :style => "height:100px;", :id => "reply-form-#{parent_post.id}-input" %>
     <%= hidden_field_tag :parent_id, parent_post.id %>
-    <%= p.submit "Post it!", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}-safe').remove();" %>
+    <%= p.submit "Post it!", :class => "btn", :id => "reply-form-#{parent_post.id}-submit", :onclick => "$('#reply-form-#{parent_post.id}-safe').remove();" %>
     <%= link_to 'Cancel', "#", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}').remove();" %>
   <% end %>
   <div id ="reply-form-<%= parent_post.id %>-safe"></div>
 </div>
+
+<script type="text/javascript">
+  $('#reply-form-<%= parent_post.id %>-input').bind('keyup', 'ctrl+return', function(){
+    $('#reply-form-<%= parent_post.id %>-submit').click();
+  });
+</script>

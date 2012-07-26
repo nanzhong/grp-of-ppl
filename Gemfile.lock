@@ -55,6 +55,8 @@ GEM
       multi_xml
     i18n (0.6.0)
     journey (1.0.4)
+    jquery-hotkeys-rails (0.7.9)
+      railties (~> 3.1)
     jquery-rails (2.0.0)
       railties (>= 3.2.0.beta, < 5.0)
       thor (~> 0.14)
@@ -152,6 +154,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.0)
   devise
   httparty
+  jquery-hotkeys-rails
   jquery-rails
   jquery-ui-rails
   mongoid (~> 3.0.0)

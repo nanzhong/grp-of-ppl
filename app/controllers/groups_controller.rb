@@ -136,14 +136,7 @@ class GroupsController < ApplicationController
     @post = @group.find_post(params[:post_id])
   end
 
-  def hide_reply
-    @post = @group.find_post(params[:post_id])
-  end
-
   def show_share
-  end
-
-  def hide_share
   end
 
   private
