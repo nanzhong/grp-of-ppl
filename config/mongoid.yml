@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: together_development
+      database: grpofppl_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -61,8 +61,10 @@ development:
 test:
   sessions:
     default:
-      database: together_test
+      database: grpofppl_test
       hosts:
-        - nan.enflick.com:27017
+        - localhost:27017
       options:
         consistency: :strong
+production:
+  uri: <%= ENV['MONGOLAB_URI'] %>

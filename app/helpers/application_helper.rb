@@ -1,11 +1,7 @@
-require 'net/http'
-
 module ApplicationHelper
 
-  def publish(channel, &block)
-    message = { :channel => channel, :data => capture(&block) }
-    uri = URI.parse("http://nan.enflick.com:9292/faye")
-    Net::HTTP.post_form(uri, :message => message.to_json)
+  def publish(channel, event, &block)
+    Push.publish(channel, event, capture(&block))
   end
 
 end

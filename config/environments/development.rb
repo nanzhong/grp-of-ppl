@@ -40,4 +40,8 @@ GrpOfPpl::Application.configure do
   :password             => 'nanailing4ever',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
+
+  Pusher.app_id = '24683'
+  Pusher.key    = '7aa7637d796a883e4a59'
+  Pusher.secret = '646d27fc795c3907421a'
 end

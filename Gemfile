@@ -6,6 +6,8 @@ gem 'devise'
 gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'httparty'
+gem 'pusher'
+gem 'thin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
