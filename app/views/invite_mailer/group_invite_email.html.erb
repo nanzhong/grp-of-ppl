@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You have been invited to join a group!</h1>
+    <p><%= link_to "Click here to join!", join_url(:id => @group.id, :token => @token) %></p>
+  </body>
+</html>

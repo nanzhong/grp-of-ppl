@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span12" style="margin-bottom:10px;">
+    <h1>Your groups!</h1>
+  </div>
+</div>
+
+<% i = 0 %>
+<% @current_user.groups.each do |group| %>
+  <% if i % 3 == 0 %>
+  <div class="row-fluid">
+  <% end %>
+    <div class="span4">
+      <%= render group %>
+    </div>
+    <% i += 1 %>
+  <% if i % 3 == 0 %>
+  </div>
+  <% end %>
+<% end %>
+<% if i % 3 != 0 %>
+</div>
+<% end %>
+
+<div class="row-fluid" style="margin-top:10px;">
+  <%= button_to "New Group", { :action => "new" }, { :class => "btn btn-large btn-primary", :method => "get", :style => "font-size:200%;" } %>
+</div>

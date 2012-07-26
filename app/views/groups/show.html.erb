@@ -1,0 +1,44 @@
+<script type="text/javascript">
+$(function() {
+  var faye = new Faye.Client('http://nan.enflick.com:9292/faye');
+  faye.subscribe('/groups/<%= @group.id %>', function(data) {
+    eval(data);
+  });
+});
+</script>
+
+<div class="row-fluid">
+  <div class="span9">
+    <h1 style="display:inline;"><%= @group.name %></h1><div style="float:right;"><%= link_to "Manage this group", edit_group_path(@group) %></div>
+
+    <div id="share-form-location" style="padding-top:10px;">
+    </div>
+
+    <div id="posts" class="row-fluid" style="padding-top:10px;">
+      <% @group.posts.desc(:created_at).each do |post| %>
+        <%= render :partial => 'posts/post', :locals => { :post => post, :group => @group } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="span3">
+    <h2>Description:</h2>
+    <p>
+    <%= @group.description %>
+    </p>
+
+    <h2>Members:</h2>
+    <ul>
+      <% @group.users.each do |user| %>
+        <li><%= user.email %><br/></li>
+      <% end %>
+      <% @group.invitees.each do |invitee| %>
+        <li><%= invitee.email %> <em>(Pending)</em></li>
+      <% end %>
+    </ul>
+
+    <div id="share-button-location">
+      <%= render 'share_button' %>
+    </div>
+  </div>
+</div>

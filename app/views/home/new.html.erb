@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="span10 offset1">
+    <span style="text-align:center">
+      <h1 style="font-size:500%; padding-top:80px; padding-bottom:20px;">Starting a new group!</h1>
+    </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_tag :action => "create" do %>
+      <h2>Step 1: Your own account</h2>
+
+      <div>
+        <%= label_tag 'email', 'Email:' %>
+        <%= email_field_tag 'email', @user.email, :size => 30, :placeholder => "your@email.com" %> <%= @user.errors[:email].empty? ? "" : @user.errors[:email].uniq.join(', ') %>
+      </div>
+
+      <h2>Step 2: Create the group</h2>
+
+      <div>
+        <% if @group.errors.count > 0 %>
+          <% @group.errors.each do |attribute, errors| %>
+            <%= attribute %>: <%= errors.uniq.join(', ') %>
+          <% end %>
+        <% end %>
+        <%= label_tag 'group_name', "Group name:" %><%= text_field_tag 'name', @group.name, :size => 30, :placeholder => "Cool name" %>
+        <%= label_tag 'others_label', 'Other members:' %><%= text_area_tag 'others_email', @others, :size => "100x6" %>
+      </div>
+
+      <%= submit_tag "Create my group!", :class => "btn btn-large btn-primary", :style => "font-size: 300%;" %>
+    <% end %>
+  </div>
+</div>

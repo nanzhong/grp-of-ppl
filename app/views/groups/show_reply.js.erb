@@ -1,0 +1,4 @@
+if (!$('#reply-form-<%= @post.id %>').length > 0) {
+  $('#post-<%= @post.id %> > .post-level > .post-container').after('<%= escape_javascript render(:partial => 'reply_form', :locals => { :parent_post => @post, :post => Post.new }) %>');
+  $('#reply-form-<%= @post.id %>-input').focus();
+}

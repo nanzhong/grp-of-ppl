@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>grp of ppl</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application", "http://nan.enflick.com:9292/faye.js" %>
+  <%= csrf_meta_tags %>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">grp of ppl</a>
+
+        <% unless @current_user.blank? %>
+        <ul class="nav pull-left">
+          <li class="divider-vertical"></li>
+          <li><%= link_to "My Groups", :controller => "groups", :action => "index" %></li>
+          <li><%= link_to "New Group", :controller => "groups", :action => "new" %></li>
+        </ul>
+
+        <ul class="nav pull-right">
+          <li>
+          <a href="<%= edit_user_path(@current_user) %>"><%= @current_user.email %><span id="notification-badge"><% if @current_user.group_invites.count > 0 %><span style="margin-left:10px;" class="badge badge-info"><%= @current_user.group_invites.count %></span></span><% end %></a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li><%= link_to "Sign Out", user_sign_out_path(@current_user), :method => :delete %></li>
+        </ul>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <% unless flash.empty? %>
+      <div class="row-fluid">
+        <div class="span12">
+          <% flash.each do |name, msg| %>
+            <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+              <a class="close" data-dismiss="alert">&#215;</a>
+              <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end%>
+
+    <%= yield %>
+
+  </div>
+
+</body>
+</html>

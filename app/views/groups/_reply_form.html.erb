@@ -1,0 +1,8 @@
+<div id="reply-form-<%= parent_post.id %>" style="margin-left:<%= (parent_post.nest_level + 1) * 20 %>px;">
+  <%= form_for [@group, post], :remote => true do |p| %>
+    <%= p.text_area :data, :class => "span12", :style => "height:100px;", :id => "reply-form-#{parent_post.id}-input" %>
+    <%= hidden_field_tag :parent_id, parent_post.id %>
+    <%= p.submit "Post it!", :class => "btn" %>
+    <%= link_to 'Cancel', { :controller => 'groups', :action => 'hide_reply', :id => @group.id, :post_id => parent_post.id }, :remote => true, :method => :get, :class => "btn" %>
+  <% end %>
+</div>

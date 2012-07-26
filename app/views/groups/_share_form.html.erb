@@ -1,0 +1,8 @@
+<div class="span12 well" id="share-form">
+  <h2>Share something new:</h2>
+  <%= form_for [@group, Post.new], :remote => true do |p| %>
+    <%= p.text_area :data, :class => "span12", :style => "height:100px;", :id => "share-form-input" %>
+    <%= p.submit "Post it!", :class => "btn" %>
+    <%= link_to 'Cancel', { :controller => 'groups', :action => 'hide_share' }, :remote => true, :method => :get, :class => "btn" %>
+  <% end %>
+</div>

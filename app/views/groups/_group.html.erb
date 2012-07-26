@@ -1,0 +1,30 @@
+<div class="group-container">
+  <h3><%= link_to group.name, group %></h3>
+  <h4>Members</h4>
+  <ul>
+    <% group.users.each do |user| %>
+      <li><%= user.email %></li>
+    <% end %>
+  </ul>
+
+  <h4>Recent Posts</h4>
+  <ul>
+    <% group.posts.desc(:created_at)[0..3].each do |post| %>
+      <li>
+      <% JSON.parse(post.data).each do |data| %>
+        <% if data["type"] == Post::Type::LINK %>
+          <%= link_to data["data"], data["data"] %>
+        <% elsif data["type"] == Post::Type::IMAGE %>
+          <ul class="thumbnails">
+            <li class="span3"><%= link_to image_tag(data["data"]), data["data"], :class => "thumbnail" %></li>
+          </ul>
+        <% elsif data["type"] == Post::Type::YOUTUBE %>
+          <iframe class="thumbnail" title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/<%= data['data'] %>" frameborder="0" allowfullscreen></iframe>
+        <% else %>
+          <%= data["data"] %>
+        <% end %>
+      <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

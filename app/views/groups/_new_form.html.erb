@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  $(function () {
+    var availableTags = [];
+
+    $('#add-members-list').tagit({tagSource:availableTags, select:true, sortable:true, tagsChanged:function () { 
+      var emails = [];
+      var tags = $('#add-members-list').tagit('tags');
+      for (var i in tags) {
+        emails.push(tags[i].value);
+      }
+
+      $('#invite_emails').replaceWith('<input id="invite_emails" name="invite_emails" type="hidden" value="' + emails.join() + '" />');
+    }});
+
+  });
+</script>
+
+<%= form_for(@group) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= label_tag 'group_name', "Group name:" %><%= f.text_field 'name', :placeholder => "Cool name", :style => "width:100%;" %><br />
+    <%= label_tag 'description', 'Description' %><%= f.text_area :description, :rows => 6, :style => "width:100%;" %>
+    <%= label_tag 'others_label', 'Other members:' %>
+    <ul id="add-members-list" data-name="add-members-list"></ul>
+    <input id="invite_emails" name="invite_emails" type="hidden" value="" />
+  </div>
+
+  <div class="actions">
+    <%= f.submit nil, :class => "btn btn-large btn-primary" %>
+  </div>
+<% end %>
