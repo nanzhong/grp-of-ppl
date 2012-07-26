@@ -95,6 +95,7 @@ class GroupsController < ApplicationController
 
         if invites.empty?
           render 'invalid_invite'
+          return
         else
           invites.each do |invite|
             @current_user.group_invites.delete(invite)
