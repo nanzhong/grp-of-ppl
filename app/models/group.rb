@@ -69,7 +69,7 @@ class Group
         if invited.count == 1
           invited.first
         else
-          invited[0..-1].join(', ') + ', and ' + invited[-1]
+          invited[0...-1].join(', ') + ', and ' + invited[-1]
         end
 
       post_data = [] << { type: Post::Type::USER_INVITE,

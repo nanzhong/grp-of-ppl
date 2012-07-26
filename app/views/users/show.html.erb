@@ -6,7 +6,7 @@
     <h3>Display name</h3>
     <%= @user.name %>
     <h3>Your sign in link</h3>
-    <%= link_to user_sign_in_url(@user) %>
+    <%= link_to user_sign_in_url(@user, :token => @user.auth_token) %>
   </div>
 
   <div id="pending-invites">
