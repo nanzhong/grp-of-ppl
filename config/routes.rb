@@ -75,6 +75,7 @@ GrpOfPpl::Application.routes.draw do
   match '/groups/:id/hide_reply/:post_id' => 'groups#hide_reply'
   match '/groups/:id/show_share' => 'groups#show_share'
   match '/groups/:id/hide_share' => 'groups#hide_share'
+  match '/home' => 'home#index'
   match '/home/new' => 'home#new'
   match '/home/create' => 'home#create'
 

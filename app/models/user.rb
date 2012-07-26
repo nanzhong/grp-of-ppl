@@ -11,4 +11,8 @@ class User
  
   has_and_belongs_to_many :groups
   embeds_many :group_invites
+
+  after_create do |user|
+    UserMailer.account_creation_email(user).deliver
+  end
 end

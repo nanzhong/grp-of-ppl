@@ -4,7 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>You have been invited to join a group!</h1>
+    <h1>You have been invited to join <%= @group.name %>!</h1>
     <p><%= link_to "Click here to join!", join_url(:id => @group.id, :token => @token) %></p>
+    <p>If the above link does not work, please copy and past this link into your browser <%= link_to join_url(:id => @group.id, :token => @token), join_url(:id => @group.id, :token => @token) %></p>
   </body>
 </html>

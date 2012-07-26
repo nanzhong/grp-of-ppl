@@ -1,0 +1,3 @@
+Welcome to grp of ppl!
+<%= "="*100 %>
+If you ever get logged out of our site, you can use this link to sign back int: <%= user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %>

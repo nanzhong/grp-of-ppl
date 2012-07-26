@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Welcome to grp of ppl!</h1>
+    <p>If you ever get logged out of our site <%= link_to "click here to sign back in!", user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></p>
+    <p>If the above link does not work, please copy and past this link into your browser: <%= link_to user_sign_in_url(:user_id => @user.id, :token => @user.auth_token), user_sign_in_url(:user_id => @user.id, :token => @user.auth_token) %></p>
+  </body>
+</html>

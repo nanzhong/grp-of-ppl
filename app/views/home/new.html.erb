@@ -1,3 +1,20 @@
+<script type="text/javascript">
+  $(function () {
+    var availableTags = [];
+
+    $('#add-members-list').tagit({tagSource:availableTags, select:true, sortable:true, tagsChanged:function () { 
+      var emails = [];
+      var tags = $('#add-members-list').tagit('tags');
+      for (var i in tags) {
+        emails.push(tags[i].value);
+      }
+
+      $('#invite_emails').replaceWith('<input id="invite_emails" name="invite_emails" type="hidden" value="' + emails.join() + '" />');
+    }});
+
+  });
+</script>
+
 <div class="row">
   <div class="span10 offset1">
     <span style="text-align:center">
@@ -24,11 +41,14 @@
             <%= attribute %>: <%= errors.uniq.join(', ') %>
           <% end %>
         <% end %>
-        <%= label_tag 'group_name', "Group name:" %><%= text_field_tag 'name', @group.name, :size => 30, :placeholder => "Cool name" %>
-        <%= label_tag 'others_label', 'Other members:' %><%= text_area_tag 'others_email', @others, :size => "100x6" %>
+        <%= label_tag 'group_name', "Group name:" %><%= text_field_tag :name, nil, :placeholder => "Cool name", :style => "width:100%;" %><br />
+        <%= label_tag 'description', 'Description:' %><%= text_area_tag :description, nil, :rows => 6, :style => "width:100%;" %>
+        <%= label_tag 'other_memebrs', "Other members:" %>
+        <ul id="add-members-list" data-name="add-members-list"></ul>
+        <input id="invite_emails" name="invite_emails" type="hidden" value="" />
       </div>
 
-      <%= submit_tag "Create my group!", :class => "btn btn-large btn-primary", :style => "font-size: 300%;" %>
+      <%= submit_tag "Create my group!", :class => "btn btn-large btn-primary", :style => "font-size:300%;width:100%" %>
     <% end %>
   </div>
 </div>

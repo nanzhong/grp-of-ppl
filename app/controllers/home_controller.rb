@@ -16,7 +16,7 @@ class HomeController < ApplicationController
 
   def create
     @user = User.new(:email => params[:email])
-    @group = Group.new(:name => params[:name])
+    @group = Group.new(:name => params[:name], :description => params[:description])
 
     @others = params[:others_email]
 
@@ -25,6 +25,7 @@ class HomeController < ApplicationController
 
       @group.users.push @user
       if @group.save
+        @group.invite params[:invite_emails].split(',')
         redirect_to @group
       else
         render action: "new"
