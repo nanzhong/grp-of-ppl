@@ -1,5 +1,5 @@
 <div id="post-<%= post.id %>">
-  <div class="post-level" style="margin-left: <%= post.nest_level * 20 %>px;">
+  <div class="post-level" style="margin-left: <%= post.group.blank? ? 15 : 0 %>px;">
     <div class="post-container">
       <% if post.user.nil? %>
         <%= render :partial => 'posts/system_post', :locals => { :user_post => post, :group => group } %>
