@@ -1,14 +1,7 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
+  
+  before_filter :require_sign_in
+  before_filter :owner_of_user
 
   # GET /users/1
   # GET /users/1.json
@@ -17,17 +10,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
-    end
-  end
-
-  # GET /users/new
-  # GET /users/new.json
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @user }
     end
   end
@@ -121,5 +103,10 @@ class UsersController < ApplicationController
       @invite.group.invitees.delete(invitee)
     end
     @invite.delete
+  end
+
+  private
+  def owner_of_user
+    redirect_to root_path if @current_user.id != params[:id]
   end
 end
