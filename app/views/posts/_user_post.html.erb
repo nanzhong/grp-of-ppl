@@ -1,0 +1,22 @@
+<p>
+<strong><%= user_post.user.email %></strong> <em><%= time_ago_in_words user_post.created_at %> ago</em>
+</p>
+<p>
+<% JSON.parse(user_post.data).each do |data| %>
+  <% if data["type"] == Post::Type::LINK %>
+    <%= link_to data["data"], data["data"] %>
+  <% elsif data["type"] == Post::Type::IMAGE %>
+    <ul class="thumbnails">
+      <li class="span3"><%= link_to image_tag(data["data"]), data["data"], :class => "thumbnail" %></li>
+    </ul>
+  <% elsif data["type"] == Post::Type::YOUTUBE %>
+    <iframe class="thumbnail" title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/<%= data['data'] %>" frameborder="0" allowfullscreen></iframe>
+  <% else %>
+    <%= data["data"] %>
+  <% end %>
+<% end %>
+</p>
+<ul class="post-nav">
+  <li><%= link_to "reply", { :controller => 'groups', :action => 'show_reply', :id => group.id, :post_id => user_post.id }, :remote => true, :method => :get %></li>
+  <li><%= link_to "permalink", "#" %></li>
+</ul>

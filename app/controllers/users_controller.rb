@@ -94,6 +94,12 @@ class UsersController < ApplicationController
 
     @invite.delete
 
+    post_data = [] << { type: Post::Type::USER_JOIN,
+                        data: @user.name }
+
+    @post = @invite.group.posts.create( created_at: Time.now,
+                                       data: post_data.to_json )
+
     # XXX see GroupInvite model
     PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }
   end
@@ -105,6 +111,12 @@ class UsersController < ApplicationController
       @invite.group.invitees.delete(invitee)
     end
     @invite.delete
+
+    post_data = [] << { type: Post::Type::USER_IGNORE,
+                        data: @user.name }
+
+    @post = @invite.group.posts.create( created_at: Time.now,
+                                       data: post_data.to_json )
 
     # XXX see GroupInvite model
     PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }

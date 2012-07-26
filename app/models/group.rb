@@ -11,6 +11,13 @@ class Group
   embeds_many :posts
   embeds_many :invitees
 
+  after_create do |group|
+    data = { type: Post::Type::GROUP_BEGIN, 
+             data: group.name }
+    group.posts.create( created_at: Time.now,
+                        data: [data].to_json )
+  end
+
   def find_post(id)
     children = self.posts.where(:id => id)
     return children.first unless children.empty?
@@ -32,6 +39,7 @@ class Group
   end
 
   def invite(invitees)
+    invited = []
     invitees.each do |email|
       email.strip!
 
@@ -52,6 +60,23 @@ class Group
         # XXX see GroupInvite model
         PubSub.publish "users-#{invite.user.id}", 'invite-add', { :badge => invite.user.group_invites.count, :id => invite.id }
       end
+
+      invited << email
+    end
+
+    if invited.count > 0
+      invited_str = 
+        if invited.count == 1
+          invited.first
+        else
+          invited[0..-1].join(', ') + ', and ' + invited[-1]
+        end
+
+      post_data = [] << { type: Post::Type::USER_INVITE,
+                          data: invited_str }
+
+      self.posts.create( created_at: Time.now,
+                          data: post_data.to_json )
     end
   end
 

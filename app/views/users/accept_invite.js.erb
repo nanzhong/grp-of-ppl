@@ -1,1 +1,4 @@
 $('#invite-<%= @invite.group.id %>').remove();
+<% publish "groups-#{@invite.group.id}", 'new-post' do %>
+  <%= render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>
+<% end %>

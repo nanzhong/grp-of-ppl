@@ -2,7 +2,11 @@ class Post
   include Mongoid::Document
 
   module Type
-    SYSTEM  = 0
+    USER_IGNORE = -4
+    USER_JOIN   = -3
+    USER_INVITE = -2
+    GROUP_BEGIN = -1
+
     TEXT    = 1
     LINK    = 2
     IMAGE   = 3

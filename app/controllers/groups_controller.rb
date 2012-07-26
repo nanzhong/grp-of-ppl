@@ -120,6 +120,14 @@ class GroupsController < ApplicationController
       end
       @group.save
 
+      post_data = [] << { type: Post::Type::USER_JOIN,
+                          data: @current_user.name }
+
+      @post = @group.posts.create( created_at: Time.now,
+                                 data: post_data.to_json )
+
+      PubSub.publish "groups-#{@group.id}", 'new-post', { :html => render_to_string(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) }
+
       redirect_to @group
     end
   end

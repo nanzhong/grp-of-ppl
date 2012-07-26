@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
 
   def sign_in_user(user)
     cookies[:auth_token] = { :value => user.auth_token, :expires => 10.days.from_now }
+    @current_user = user
   end
 
   def redirect_to_back

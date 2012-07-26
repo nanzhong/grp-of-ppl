@@ -1,0 +1,18 @@
+<% JSON.parse(user_post.data).each do |data| %>
+  <div><%= time_ago_in_words user_post.created_at %> ago</div>
+  <% if data["type"] == Post::Type::GROUP_BEGIN %>
+    <span class="label label-success">Right on! ;) <i class="icon-flag"></i></span>
+    <h4 style="display:inline;">The birth of <%= data["data"] %>! :)</h4>
+  <% elsif data["type"] == Post::Type::USER_INVITE %>
+    <span class="label label-info">Info <i class="icon-exclamation-sign"></i></span>
+    <h4 style="display:inline;">Invited <%= data["data"] %> to the group :O!</h4>
+  <% elsif data["type"] == Post::Type::USER_JOIN %>
+    <span class="label label-success">Oh yeah! <i class="icon-thumbs-up"></i></span>
+    <h4 style="display:inline;"><%= data["data"] %> has joined the group :D!</h4>
+  <% elsif data["type"] == Post::Type::USER_IGNORE %>
+    <span class="label label-important">Oh noes... <i class="icon-thumbs-down"></i></span>
+    <h4 style="display:inline;"><%= data["data"] %> didn't want to be a part of this party. :'(</h4>
+  <% else %>
+    <h4 style="display:inline;"><%= data["data"] %></h4>
+  <% end %>
+<% end %>
