@@ -35,4 +35,19 @@ class HomeController < ApplicationController
     end
   end
 
+  def forgot
+    @user = User.where(:email => params[:email].strip)
+    if @user.empty?
+      flash[:alert] = "We can't find an account with that email... :'("
+      redirect_to root_path
+    else
+      @user.each do |user|
+        UserMailer.forgot_sign_in_email(user).deliver
+      end
+
+      flash[:notice] = "The link was sent! Check your email. ;)"
+      redirect_to root_path
+    end
+  end
+
 end

@@ -5,23 +5,16 @@
     </div>
     <h3>Display name</h3>
     <%= @user.name %>
-    
+    <h3>Your sign in link</h3>
+    <%= link_to user_sign_in_url(@user) %>
   </div>
 
   <div id="pending-invites">
     <h2>Pending Invites</h2>
-    <% i = 0 %>
     <% @user.group_invites.each do |invite| %>
-      <% if i % 3 == 0 %>
-        <div class="row-fluid">
-        <% end %>
+      <div class="row-fluid">
         <%= render :partial => 'invite', :locals => { :invite => invite } %>
-        <% if i % 3 == 0 %>
-        </div>
-      <% end %>
+      </div>
     <% end %>
-    <% if i % 3 != 0 %>
-    </div>
-  <% end %>
-</div>
+  </div>
 </div>

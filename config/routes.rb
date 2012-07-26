@@ -78,5 +78,6 @@ GrpOfPpl::Application.routes.draw do
   match '/home' => 'home#index'
   match '/home/new' => 'home#new'
   match '/home/create' => 'home#create'
+  post '/home/forgot' => 'home#forgot'
 
 end
