@@ -35,7 +35,10 @@ class Group
     invitees.each do |email|
       email.strip!
 
-      next unless self.invitees.where(:email => email).empty? or self.users.where(:email => email).empty?
+      if self.invitees.where(:email => email).count > 0 ||
+         self.users.where(:email => email).count > 0
+        next
+      end
 
       now = Time.now
       token = Digest::MD5.hexdigest(now.to_s)
