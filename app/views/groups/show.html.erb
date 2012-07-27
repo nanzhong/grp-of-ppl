@@ -40,10 +40,12 @@
   </div>
 
   <div class="span3">
-    <h2>Description:</h2>
-    <p>
-    <%= @group.description %>
-    </p>
+    <% unless @group.description.blank? %>
+      <h2>Description:</h2>
+      <p>
+      <%= @group.description %>
+      </p>
+    <% end %>
 
     <h2>Members:</h2>
     <ul>
