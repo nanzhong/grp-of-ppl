@@ -15,7 +15,8 @@ class Group
     data = { type: Post::Type::GROUP_BEGIN, 
              data: group.name }
     group.posts.create( created_at: Time.now,
-                        data: [data].to_json )
+                        data: [data].to_json,
+                        post_data: [data].to_json )
   end
 
   def find_post(id)
@@ -42,7 +43,7 @@ class Group
     invited = []
     invitees.each do |email|
       email.strip!
-      email.down_case!
+      email.downcase!
 
       if self.invitees.where(:email => email).count > 0 ||
          self.users.where(:email => email).count > 0
@@ -73,11 +74,12 @@ class Group
           invited[0...-1].join(', ') + ', and ' + invited[-1]
         end
 
-      post_data = [] << { type: Post::Type::USER_INVITE,
+      data = [] << { type: Post::Type::USER_INVITE,
                           data: invited_str }
 
       self.posts.create( created_at: Time.now,
-                          data: post_data.to_json )
+                         data: data.to_json,
+                         post_data: data.to_json )
     end
   end
 

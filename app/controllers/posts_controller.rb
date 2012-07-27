@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
     unless params[:parent_id].nil?
       @parent = @group.find_post(params[:parent_id])
-      @post = @parent.child_posts.build(params[:post].merge({ :created_at => Time.now }), MessagePost)
+      @post = @parent.child_posts.build(params[:post].merge({ :created_at => Time.now }))
       @post.data = post_data.to_json
       @post.user = @current_user
 
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
       render 'create_reply'
     else
-      @post = MessagePost.new(params[:post])
+      @post = Post.new(params[:post])
 
       @post.created_at = Time.now
       @post.user = @current_user
