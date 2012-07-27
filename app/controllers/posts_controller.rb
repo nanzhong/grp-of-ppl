@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
 
-    post_data = parse_post(params[:post][:data])
+    post_data = parse_post(params[:post][:post_data])
 
     unless params[:parent_id].nil?
       @parent = @group.find_post(params[:parent_id])

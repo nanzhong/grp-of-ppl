@@ -137,9 +137,6 @@ class GroupsController < ApplicationController
     @post = @group.find_post(params[:post_id])
   end
 
-  def show_share
-  end
-
   private
 
   def group_from_id

@@ -1,4 +1,15 @@
-if (!$('#reply-form-<%= @post.id %>').length > 0) {
-  $('#post-<%= @post.id %> > .post-level > .post-container').after('<%= escape_javascript render(:partial => 'reply_form', :locals => { :parent_post => @post, :post => Post.new }) %>');
-  $('#reply-form-<%= @post.id %>-input').focus();
+function showReply() {
+  if (!$('#reply-form-<%= @post.id %>').length > 0) {
+    $('#post-level-<%= @post.id %>').prepend('<%= escape_javascript render(:partial => 'reply_form', :locals => { :parent_post => @post, :post => Post.new }); %>').hide().fadeIn();
+    $('#reply-form-<%= @post.id %>-input').focus();
+  }
 }
+
+if ($('#post-level-<%= @post.id %>').is(':hidden')) {
+  $('#post-level-hide-<%= @post.id %>').toggle();
+  $('#post-level-show-<%= @post.id %>').toggle();
+  $('#post-level-<%= @post.id %>').slideToggle(400, showReply); 
+} else {
+  showReply();
+}
+

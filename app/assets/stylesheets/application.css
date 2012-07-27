@@ -23,6 +23,11 @@
   margin-bottom: 10px;
 }
 
+.post-children {
+  padding-left: 20px; 
+  border-left: 1px dashed #dddddd;
+}
+
 .post-level-toggle {
   margin-bottom: 5px;
 }

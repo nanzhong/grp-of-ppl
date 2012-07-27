@@ -8,9 +8,9 @@
   group_channel.bind('new-reply', function(data) {
     if ($('#reply-form-' + data.parent_id + '-safe').length == 0) {
       $('#reply-form-' + data.parent_id).remove();
-      $('#post-' + data.parent_id + ' > .post-level > .post-container').after(data.html);
+      $('#post-level-' + data.parent_id).prepend(data.html);
     } else {
-      $('#post-' + data.parent_id + ' > .post-level > #reply-form-' + data.parent_id).after(data.html);
+      $('#reply-form-' + data.parent_id).after(data.html);
     }
   });
 </script>
@@ -19,10 +19,9 @@
   <div class="span9">
     <div><h1 style="display:inline; margin-right:20px"><%= @group.name %></h1><%= link_to "Manage this group", edit_group_path(@group) %></div>
 
-    <div id="share-form-location" style="padding-top:10px;">
-    </div>
+    <%= render 'share_form' %>
 
-    <div id="posts" class="row-fluid" style="padding-top:10px;">
+    <div id="posts" class="row-fluid">
       <% @posts.each do |post| %>
         <%= render :partial => 'posts/post', :locals => { :post => post, :group => @group } %>
       <% end %>
