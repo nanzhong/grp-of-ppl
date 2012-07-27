@@ -12,7 +12,7 @@
       <div class="post-level-toggle">
         <% unless post.group.blank? || post.child_posts.empty? %>
           <a id="post-level-hide-<%= post.id %>" <% if post.child_count >= 5 %>style="display:none;"<% end %> href="javascript:void(0);" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-minus"></i> Hide discussion...</a> 
-          <a id="post-level-show-<%= post.id %>" <% if post.child_count < 4 %>style="display:none;"<% end %> href="javascript:void(0);" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-plus"></i> Show discussion... <%= post.child_count %> posts hidden</a>
+          <a id="post-level-show-<%= post.id %>" <% if post.child_count < 5 %>style="display:none;"<% end %> href="javascript:void(0);" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-plus"></i> Show discussion... <%= post.child_count %> posts hidden</a>
         <% end %>
       </div>
 
