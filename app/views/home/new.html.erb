@@ -18,7 +18,7 @@
 <div class="row">
   <div class="span10 offset1">
     <span style="text-align:center">
-      <h1 style="font-size:500%; padding-top:80px; padding-bottom:20px;">Starting a new group!</h1>
+      <h1 style="font-size:400%; padding-top:20px; padding-bottom:20px;">Starting a new group!</h1>
     </span>
   </div>
 </div>
@@ -26,14 +26,14 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_tag :action => "create" do %>
-      <h2>Step 1: Your own account</h2>
+      <h3>Step 1: Your own account</h3>
 
       <div>
         <%= label_tag 'email', 'Email:' %>
-        <%= email_field_tag 'email', @user.email, :size => 30, :placeholder => "your@email.com" %> <%= @user.errors[:email].empty? ? "" : @user.errors[:email].uniq.join(', ') %>
+        <%= email_field_tag 'email', @user.email, :placeholder => "your@email.com", :style => "width:97%;" %> <%= @user.errors[:email].empty? ? "" : @user.errors[:email].uniq.join(', ') %>
       </div>
 
-      <h2>Step 2: Create the group</h2>
+      <h3>Step 2: Create the group</h3>
 
       <div>
         <% if @group.errors.count > 0 %>
@@ -41,14 +41,14 @@
             <%= attribute %>: <%= errors.uniq.join(', ') %>
           <% end %>
         <% end %>
-        <%= label_tag 'group_name', "Group name:" %><%= text_field_tag :name, nil, :placeholder => "Cool name", :style => "width:100%;" %><br />
-        <%= label_tag 'description', 'Description:' %><%= text_area_tag :description, nil, :rows => 6, :style => "width:100%;" %>
+        <%= label_tag 'group_name', "Group name:" %><%= text_field_tag :name, nil, :placeholder => "Cool name", :style => "width:97%;" %><br />
+        <%= label_tag 'description', 'Description:' %><%= text_area_tag :description, nil, :rows => 6, :style => "width:97%;" %>
         <%= label_tag 'other_memebrs', "Other members:" %>
         <ul id="add-members-list" data-name="add-members-list"></ul>
         <input id="invite_emails" name="invite_emails" type="hidden" value="" />
       </div>
 
-      <%= submit_tag "Create my group!", :class => "btn btn-large btn-primary", :style => "font-size:300%;width:100%" %>
+      <%= submit_tag "Create my group!", :class => "btn btn-large btn-primary", :style => "font-size:225%;width:100%" %>
     <% end %>
   </div>
 </div>

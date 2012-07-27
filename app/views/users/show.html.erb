@@ -1,14 +1,16 @@
-<div class="row-fluid">
+<div class="row-fluid" style="margin-bottom:10px;">
   <div>
     <div>
-      <h1 style="display:inline; margin-right:20px;"><%= @user.email %></h1><%= link_to "Edit profile", edit_user_path(@user) %>
+      <h1 style="display:inline; margin-right:20px;"><%= @user.email %></h1><%= link_to "Edit", edit_user_path(@user) %>
     </div>
     <h3>Display name</h3>
     <%= @user.name %>
     <h3>Your sign in link</h3>
-    <%= link_to user_sign_in_url(@user, :token => @user.auth_token) %>
+    <%= link_to "Save this link please :)", user_sign_in_url(@user, :token => @user.auth_token), :class => "btn btn-large" %>
   </div>
+</div>
 
+<div class="row-fluid">
   <div id="pending-invites">
     <h2>Pending Invites</h2>
     <% @user.group_invites.each do |invite| %>

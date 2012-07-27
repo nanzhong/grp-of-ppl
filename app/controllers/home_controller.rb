@@ -15,7 +15,7 @@ class HomeController < ApplicationController
   end
 
   def create
-    @user = User.new(:email => params[:email])
+    @user = User.new(:email => params[:email].downcase)
     @group = Group.new(:name => params[:name], :description => params[:description])
 
     @others = params[:others_email]
@@ -36,7 +36,7 @@ class HomeController < ApplicationController
   end
 
   def forgot
-    @user = User.where(:email => params[:email].strip)
+    @user = User.where(:email => params[:email].strip.downcase)
     if @user.empty?
       flash[:alert] = "We can't find an account with that email... :'("
       redirect_to root_path

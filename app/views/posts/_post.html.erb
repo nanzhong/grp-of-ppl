@@ -8,7 +8,7 @@
       <% end %>
     </div>
 
-    <div class="post-children" style="margin-left:10px; padding-left:10px; border-left:1px dashed #dddddd;">
+    <div class="post-children" style="padding-left:20px; border-left:1px dashed #dddddd;">
       <div class="post-level-toggle">
         <% unless post.group.blank? || post.child_posts.empty? %>
           <a id="post-level-hide-<%= post.id %>" <% if post.child_count >= 5 %>style="display:none;"<% end %> href="#" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-minus"></i> Hide discussion...</a> 

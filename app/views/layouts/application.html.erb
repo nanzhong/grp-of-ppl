@@ -46,21 +46,29 @@
       <div class="container">
         <a class="brand" href="#">grp of ppl</a>
 
-        <% unless @current_user.blank? %>
-        <ul class="nav pull-left">
-          <li class="divider-vertical"></li>
-          <li><%= link_to "My Groups", :controller => "groups", :action => "index" %></li>
-          <li class="divider-vertical"></li>
-          <li><%= link_to "New Group", :controller => "groups", :action => "new" %></li>
-        </ul>
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-        <ul class="nav pull-right">
-          <li>
-          <a href="<%= user_path(@current_user) %>"><%= @current_user.email %><span style="margin-left:10px;" id="notification-badge"><% if @current_user.group_invites.count > 0 %><span class="badge badge-info" id="badge-count"><%= @current_user.group_invites.count %></span></span><% end %></a>
-          </li>
-          <li class="divider-vertical"></li>
-          <li><%= link_to "Sign Out", user_sign_out_path(@current_user), :method => :delete %></li>
-        </ul>
+        <% unless @current_user.blank? %>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-left">
+              <li class="divider-vertical"></li>
+              <li><%= link_to "My Groups", :controller => "groups", :action => "index" %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "New Group", :controller => "groups", :action => "new" %></li>
+            </ul>
+
+            <ul class="nav pull-right">
+              <li>
+              <a href="<%= user_path(@current_user) %>"><%= @current_user.email %><span style="margin-left:10px;" id="notification-badge"><% if @current_user.group_invites.count > 0 %><span class="badge badge-info" id="badge-count"><%= @current_user.group_invites.count %></span></span><% end %></a>
+              </li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Sign Out", user_sign_out_path(@current_user), :method => :delete %></li>
+            </ul>
+          </div>
       <% end %>
       </div>
     </div>
