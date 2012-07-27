@@ -12,7 +12,7 @@
   <div id="pending-invites">
     <h2>Pending Invites</h2>
     <% @user.group_invites.each do |invite| %>
-      <div class="row-fluid">
+      <div class="row-fluid" style="margin-bottom:10px;">
         <%= render :partial => 'invite', :locals => { :invite => invite } %>
       </div>
     <% end %>

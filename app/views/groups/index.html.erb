@@ -7,7 +7,7 @@
 <% i = 0 %>
 <% @current_user.groups.each do |group| %>
   <% if i % 3 == 0 %>
-  <div class="row-fluid">
+  <div class="row-fluid" style="margin-bottom:10px;">
   <% end %>
     <div class="span4">
       <%= render group %>
@@ -21,6 +21,6 @@
 </div>
 <% end %>
 
-<div class="row-fluid" style="margin-top:10px;">
+<div class="row-fluid">
   <%= button_to "New Group", { :action => "new" }, { :class => "btn btn-large btn-primary", :method => "get", :style => "font-size:200%;" } %>
 </div>
