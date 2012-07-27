@@ -1,4 +1,4 @@
-<div id="post-<%= post.id %>">
+<div id="post-<%= post.id %>"<% if defined? hidden %> style="display:none;"<% end %>>
   <div class="post-level">
     <div class="post-container">
       <% if post.user.nil? %>
@@ -11,12 +11,12 @@
     <div class="post-children" style="margin-left:10px; padding-left:10px; border-left:1px dashed #dddddd;">
       <div class="post-level-toggle">
         <% unless post.group.blank? || post.child_posts.empty? %>
-          <a id="post-level-hide-<%= post.id %>" href="#" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-minus"></i> Hide discussion...</a> 
-          <a id="post-level-show-<%= post.id %>" style="display:none;" href="#" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-plus"></i> Show discussion... <%= post.child_count %> posts hidden</a>
+          <a id="post-level-hide-<%= post.id %>" <% if post.child_count >= 5 %>style="display:none;"<% end %> href="#" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-minus"></i> Hide discussion...</a> 
+          <a id="post-level-show-<%= post.id %>" <% if post.child_count < 4 %>style="display:none;"<% end %> href="#" onclick="$('#post-level-<%= post.id %>').slideToggle(); $('#post-level-hide-<%= post.id %>').toggle(); $('#post-level-show-<%= post.id %>').toggle();"><i class="icon-plus"></i> Show discussion... <%= post.child_count %> posts hidden</a>
         <% end %>
       </div>
 
-      <div id="post-level-<%= post.id %>">
+      <div id="post-level-<%= post.id %>" <% if post.child_count >= 5 %>style="display:none;"<% end %>>
         <% post.child_posts.desc(:created_at).each do |child_post| %>
           <%= render :partial => 'posts/post', :locals => { :post => child_post, :group => group } %>
         <% end %>

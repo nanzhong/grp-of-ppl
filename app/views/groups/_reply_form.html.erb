@@ -9,18 +9,11 @@
 </div>
 
 <script type="text/javascript">
-  var clicked = false;
   $('#reply-form-<%= parent_post.id %>-input').bind('keyup', 'ctrl+return', function(){
-      if (!clicked) {
-        $('#reply-form-<%= parent_post.id %>-submit').click();
-        clicked = true;
-      }
+    $('#reply-form-<%= parent_post.id %>-submit').click();
   });
 
   $('#reply-form-<%= parent_post.id %>-input').bind('keyup', 'ctrl+enter', function(){
-      if (!clicked) {
-        $('#reply-form-<%= parent_post.id %>-submit').click();
-        clicked = true;
-      }
+    $('#reply-form-<%= parent_post.id %>-submit').click();
   });
 </script>

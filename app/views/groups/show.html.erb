@@ -2,16 +2,17 @@
   var group_channel = pusher.subscribe('groups-<%= @group.id %>');
   group_channel.bind('new-post', function(data) {
     $('#posts').prepend(data.html);
-    $('#share-form').remove();
+    $('#post-' + data.id).show('highlight', 1000);
   });
 
   group_channel.bind('new-reply', function(data) {
-    if ($('#reply-form-' + data.parent_id + '-safe').length == 0) {
-      $('#reply-form-' + data.parent_id).remove();
+    if ($('#reply-form-' + data.parent_id).length == 0) {
       $('#post-level-' + data.parent_id).prepend(data.html);
     } else {
       $('#reply-form-' + data.parent_id).after(data.html);
     }
+
+    $('#post-' + data.id).show('highlight', 1000);
   });
 
   group_channel.bind('user-join', function(data) {

@@ -1,3 +1,4 @@
-<% publish "groups-#{@group.id}", 'new-reply', :parent_id => @parent.id do %>
-  <%= render(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) %>
+<% publish "groups-#{@group.id}", 'new-reply', { :parent_id => @parent.id, :id => @post.id } do %>
+  <%= render(:partial => 'posts/post', :locals => { :post => @post, :group => @group, :hidden => true }) %>
 <% end %>
+$('#reply-form-<%= @parent.id %>').remove();

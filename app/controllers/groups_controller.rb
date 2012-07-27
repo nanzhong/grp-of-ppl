@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @posts = @group.posts.desc(:created_at).page(params[:page]).per(5)
+    @posts = @group.posts.desc(:created_at).page(params[:page]).per(10)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @group }
