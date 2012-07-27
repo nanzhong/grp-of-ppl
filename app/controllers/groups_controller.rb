@@ -129,7 +129,7 @@ class GroupsController < ApplicationController
                                  data: post_data.to_json )
 
       PubSub.publish "groups-#{@group.id}", 'new-post', { :html => render_to_string(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) }
-      @invitee.each do |invitee|
+      @invitees.each do |invitee|
         PubSub.publish "groups-#{@group.id}", 'user-join', { :id => invitee.id }
       end
 
