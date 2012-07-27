@@ -86,7 +86,8 @@ class UsersController < ApplicationController
   def accept_invite
     @user = User.find(params[:user_id])
     @invite = @user.group_invites.find_by(:token => params[:token])
-    @invite.group.invitees.where(:token => params[:token]).each do |invitee|
+    @invitees = @invite.group.invitees.where(:token => params[:token])
+    @invitees.each do |invitee|
       @invite.group.invitees.delete(invitee)
     end
 
@@ -102,12 +103,16 @@ class UsersController < ApplicationController
 
     # XXX see GroupInvite model
     PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }
+    @invitees.each do |invitee|
+      PubSub.publish "groups-#{@invite.group.id}", 'user-join', { :id => invitee.id }
+    end
   end
 
    def ignore_invite
     @user = User.find(params[:user_id])
     @invite = @user.group_invites.find_by(:token => params[:token])
-    @invite.group.invitees.where(:token => params[:token]).each do |invitee|
+    @invitees = @invite.group.invitees.where(:token => params[:token])
+    @invitees.each do |invitee|
       @invite.group.invitees.delete(invitee)
     end
     @invite.delete
@@ -120,6 +125,9 @@ class UsersController < ApplicationController
 
     # XXX see GroupInvite model
     PubSub.publish "users-#{@invite.user.id}", 'invite-del', { :badge => @invite.user.group_invites.count, :id => @invite.id }
+    @invitees.each do |invitee|
+      PubSub.publish "groups-#{@invite.group.id}", 'user-ignore', { :id => invitee.id }
+    end
   end
 
   def show_invite

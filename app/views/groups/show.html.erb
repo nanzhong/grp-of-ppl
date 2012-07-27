@@ -13,6 +13,14 @@
       $('#reply-form-' + data.parent_id).after(data.html);
     }
   });
+
+  group_channel.bind('user-join', function(data) {
+    $('#pending-' + data.id).remove();
+  });
+
+  group_channel.bind('user-ignore', function(data) {
+    $('#invitee-' + data.id).remove();
+  });
 </script>
 
 <div class="row-fluid">
@@ -43,7 +51,7 @@
         <li><%= user.email %><br/></li>
       <% end %>
       <% @group.invitees.each do |invitee| %>
-        <li><%= invitee.email %> <em>(Pending)</em></li>
+        <li id="invitee-<%= invitee.id %>"><%= invitee.email %> <em id="pending-<%= invitee.id %>">(Pending)</em></li>
       <% end %>
     </ul>
 

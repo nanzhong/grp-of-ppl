@@ -116,7 +116,8 @@ class GroupsController < ApplicationController
         @group.users.push @user
       end
 
-      @group.invitees.where(:token => params[:token]).each do |invitee|
+      @invitees = @group.invitees.where(:token => params[:token])
+      @invitees.each do |invitee|
         @group.invitees.delete(invitee)
       end
       @group.save
@@ -128,6 +129,9 @@ class GroupsController < ApplicationController
                                  data: post_data.to_json )
 
       PubSub.publish "groups-#{@group.id}", 'new-post', { :html => render_to_string(:partial => 'posts/post', :locals => { :post => @post, :group => @group }) }
+      @invitee.each do |invitee|
+        PubSub.publish "groups-#{@group.id}", 'user-join', { :id => invitee.id }
+      end
 
       redirect_to @group
     end
