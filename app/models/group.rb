@@ -41,7 +41,8 @@ class Group
   def invite(invitees)
     invited = []
     invitees.each do |email|
-      email.strip!.downcase!
+      email.strip!
+      email.down_case!
 
       if self.invitees.where(:email => email).count > 0 ||
          self.users.where(:email => email).count > 0
