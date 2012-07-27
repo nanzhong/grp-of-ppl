@@ -3,7 +3,7 @@
     <%= p.text_area :post_data, :class => "span12", :style => "height:100px;", :id => "reply-form-#{parent_post.id}-input" %>
     <%= hidden_field_tag :parent_id, parent_post.id %>
     <%= p.submit "Post it!", :class => "btn", :id => "reply-form-#{parent_post.id}-submit", :onclick => "$('#reply-form-#{parent_post.id}-safe').remove();" %>
-    <%= link_to 'Cancel', "#", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}').fadeOut(400, function() { $(this).remove(); });" %>
+    <%= link_to 'Cancel', "javascript:void(0);", :class => "btn", :onclick => "$('#reply-form-#{parent_post.id}').fadeOut(400, function() { $(this).remove(); });" %>
   <% end %>
   <div id ="reply-form-<%= parent_post.id %>-safe"></div>
 </div>

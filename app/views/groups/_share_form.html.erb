@@ -4,7 +4,7 @@
     <%= form_for [@group, Post.new], :remote => true do |p| %>
       <%= p.text_area :post_data, :class => "span12", :style => "height:100px;", :id => "share-form-input" %>
       <%= p.submit "Post it!", :class => "btn", :id => "share-form-submit" %>
-      <%= link_to 'Cancel', "#", :class => "btn", :onclick => "$('#share-form').fadeToggle(); $('#share-form-input').val('');" %>
+      <%= link_to 'Cancel', "javascript:void(0);", :class => "btn", :onclick => "$('#share-form').fadeToggle(); $('#share-form-input').val('');" %>
     <% end %>
   </div>
 </div>
