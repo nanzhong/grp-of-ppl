@@ -23,10 +23,13 @@
     </div>
 
     <div id="posts" class="row-fluid" style="padding-top:10px;">
-      <% @group.posts.desc(:created_at).each do |post| %>
+      <% @posts.each do |post| %>
         <%= render :partial => 'posts/post', :locals => { :post => post, :group => @group } %>
       <% end %>
     </div>
+
+    <%= paginate @posts %>
+
   </div>
 
   <div class="span3">

@@ -13,8 +13,9 @@ class Post
     YOUTUBE = 4
   end
 
-  field :created_at, type: DateTime
-  field :data, type: String
+  field :created_at,  type: DateTime
+  field :data,        type: String
+  field :post_data,   type: String
 
   embedded_in :group
   belongs_to :user

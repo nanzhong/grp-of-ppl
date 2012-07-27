@@ -10,6 +10,7 @@ gem 'jquery-hotkeys-rails'
 gem 'httparty'
 gem 'pusher'
 gem 'thin'
+gem 'kaminari'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
