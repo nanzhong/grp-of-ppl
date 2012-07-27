@@ -31,4 +31,36 @@ class Post
 
     level
   end
+
+  def child_depth
+    level = 0
+    current_level = self.child_posts
+    until current_level.empty?
+      next_level = []
+      current_level.each do |post|
+        next_level += post.child_posts
+      end
+
+      current_level = next_level
+      level += 1
+    end
+
+    level
+  end
+
+  def child_count
+    count = 0
+    current_level = self.child_posts
+    until current_level.empty?
+      next_level = []
+      current_level.each do |post|
+        next_level += post.child_posts
+      end
+
+      count += current_level.count
+      current_level = next_level
+    end
+
+    count
+  end
 end

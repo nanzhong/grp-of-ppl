@@ -1,5 +1,5 @@
 <div id="post-<%= post.id %>">
-  <div class="post-level" style="margin-left: <%= post.group.blank? ? 15 : 0 %>px;">
+  <div class="post-level">
     <div class="post-container">
       <% if post.user.nil? %>
         <%= render :partial => 'posts/system_post', :locals => { :user_post => post, :group => group } %>
@@ -8,8 +8,19 @@
       <% end %>
     </div>
 
-    <% post.child_posts.desc(:created_at).each do |child_post| %>
-      <%= render :partial => 'posts/post', :locals => { :post => child_post, :group => group } %>
-    <% end %>
+    <div style="margin-left:10px; padding-left:10px; border-left:1px dashed #dddddd;">
+      <% unless post.group.blank? || post.child_posts.empty? %>
+        <div class="post-level-toggle">
+          <a id="post-level-hide-<%= post.id %>" href="#" onclick="$('#post-level-<%= post.id %>').hide('blind', {}, 500); $('#post-level-hide-<%= post.id %>').hide('', {}, 500); $('#post-level-show-<%= post.id %>').show('', {}, 500);"><i class="icon-minus"></i>Hide discussion...</a> 
+          <a id="post-level-show-<%= post.id %>" style="display:none;" href="#" onclick="$('#post-level-<%= post.id %>').show('blind', {}, 500); $('#post-level-hide-<%= post.id %>').show('', {}, 500); $('#post-level-show-<%= post.id %>').hide('', {}, 500);"><i class="icon-plus"></i> Show discussion... <%= post.child_count %> posts hidden</a>
+        </div>
+      <% end %>
+
+      <div id="post-level-<%= post.id %>">
+        <% post.child_posts.desc(:created_at).each do |child_post| %>
+          <%= render :partial => 'posts/post', :locals => { :post => child_post, :group => group } %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
