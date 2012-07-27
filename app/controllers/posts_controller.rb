@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
 
+  before_filter :require_sign_in , :except => [:permalink]
+  before_filter :group_from_id
+  before_filter :member_of_group, :only => [:create]
+
   VALID_URI_REGEX = /(https?:\/\/[\S]+)/
   YOUTUBE_REGEX = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?(\w{10,})/
 
   def create
-    @group = Group.find(params[:group_id])
-
     post_data = parse_post(params[:post][:post_data])
 
     unless params[:parent_id].nil?
@@ -29,6 +31,12 @@ class PostsController < ApplicationController
 
       render 'create'
     end
+  end
+
+  def permalink
+    @post = @group.posts.find(params[:post_id])
+
+    render :layout => 'clean'
   end
 
   private 
@@ -63,5 +71,13 @@ class PostsController < ApplicationController
     end
 
     post_data
+  end
+
+  def group_from_id
+    @group = Group.find(params[:group_id])
+  end
+
+  def member_of_group
+    render "/groups/not_member" if @group.users.where(:email => @current_user.email).empty?
   end
 end

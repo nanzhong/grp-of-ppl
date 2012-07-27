@@ -67,7 +67,9 @@ GrpOfPpl::Application.routes.draw do
   end
 
   resources :groups do
-    resources :posts, :only => [ :create ]
+    resources :posts, :only => [:create] do
+      get 'permalink' => 'posts#permalink', :as => :permalink
+    end
   end
 
   match '/groups/:id/join/:token' => 'groups#join', :as => :join

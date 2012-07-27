@@ -17,6 +17,8 @@ class Post
   field :data,        type: String
   field :post_data,   type: String
 
+  validates_presence_of :created_at, :post_data
+
   embedded_in :group
   belongs_to :user
   recursively_embeds_many

@@ -16,7 +16,11 @@
   <% end %>
 <% end %>
 </p>
-<ul class="post-nav">
-  <li><%= link_to "reply", { :controller => 'groups', :action => 'show_reply', :id => group.id, :post_id => user_post.id }, :remote => true, :method => :get %></li>
-  <li><%= link_to "permalink", "#" %></li>
-</ul>
+<% unless defined? permalink %>
+  <ul class="post-nav">
+    <li><%= link_to "reply", { :controller => 'groups', :action => 'show_reply', :id => group.id, :post_id => user_post.id }, :remote => true, :method => :get %></li>
+    <% unless user_post.group.blank? %>
+      <li><%= link_to "permalink", group_post_permalink_path(user_post.group, user_post) %></li>
+    <% end %>
+  </ul>
+<% end %>

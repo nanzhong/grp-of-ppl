@@ -1,5 +1,5 @@
 <% JSON.parse(user_post.data).each do |data| %>
-  <div><%= time_ago_in_words user_post.created_at %> ago</div>
+  <div><em><%= time_ago_in_words user_post.created_at %> ago</em></div>
   <% if data["type"] == Post::Type::GROUP_BEGIN %>
     <span class="label label-success">Right on! ;) <i class="icon-flag"></i></span>
     <h4 style="display:inline;">The birth of <%= data["data"] %>! :)</h4>
