@@ -1,5 +1,5 @@
 <p>
-<strong><%= user_post.user.email %></strong> <em><%= time_ago_in_words user_post.created_at %> ago</em>
+<strong><%= user_post.user.name %></strong> <em><%= time_ago_in_words user_post.created_at %> ago</em>
 </p>
 <p>
 <% JSON.parse(user_post.data).each do |data| %>
